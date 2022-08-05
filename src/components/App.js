@@ -3,6 +3,7 @@ import TopBar from "./TopBar";
 
 import { TOKEN_KEY } from "../constants";
 import "../styles/App.css";
+import Main from "./Main.js";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -24,6 +25,7 @@ function App() {
   return (
     <div className="App">
       <TopBar isLoggedIn={isLoggedIn} handleLogout={logout} />
+      <Main />
     </div>
   );
 }
