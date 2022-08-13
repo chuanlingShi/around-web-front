@@ -58,11 +58,35 @@ function Home(props) {
      return <div>No data!</div>;
    }
    if (type === "image") {
-     console.log("images -> ", posts);
-     return "images";
+     const imageArr = posts
+       .filter((item) => item.type === "image")
+       .map((image) => {
+         return {
+           src: image.url,
+           user: image.user,
+           caption: image.message,
+           thumbnail: image.url,
+           thumbnailWidth: 300,
+           thumbnailHeight: 200
+         };
+       });
+
+     return <PhotoGallery images={imageArr} />;
    } else if (type === "video") {
-     console.log("video -> ", posts);
-     return "videos";
+     return (
+       <Row gutter={32}>
+         {posts
+           .filter((post) => post.type === "video")
+           .map((post) => (
+             <Col span={8} key={post.url}>
+               <video src={post.url} controls={true} className="video-block" />
+               <p>
+                 {post.user}: {post.message}
+               </p>
+             </Col>
+           ))}
+       </Row>
+     );
    }
  };
 
